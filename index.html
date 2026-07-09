@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="와와학습코칭센터 초등·중등·고등 맞춤 학습관리, 지점 검색, 상담 신청">
+  <meta name="theme-color" content="#4f46e5">
+  <title>와와학습코칭센터 | 초중고 맞춤 학습관리</title>
+
+  <!-- 카카오(다음) 우편번호 검색 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+  <style>
+    :root{
+      --primary:#4f46e5;
+      --primary-dark:#3730a3;
+      --secondary:#7c3aed;
+      --navy:#111827;
+      --text:#374151;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --soft:#f8fafc;
+      --white:#ffffff;
+      --success:#059669;
+      --danger:#dc2626;
+      --shadow:0 20px 50px rgba(17,24,39,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.72;
+      word-break:keep-all;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(1160px,calc(100% - 40px));margin:0 auto}
+    .section{padding:96px 0}
+    .section.soft{background:var(--soft)}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      color:var(--primary);font-weight:800;font-size:.9rem;
+      letter-spacing:.04em;margin-bottom:14px
+    }
+    .eyebrow::before{
+      content:"";width:28px;height:3px;border-radius:9px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary))
+    }
+    .section-title{
+      font-size:clamp(2rem,4vw,3.25rem);line-height:1.22;
+      margin:0 0 18px;color:var(--navy);letter-spacing:-.045em
+    }
+    .section-desc{max-width:820px;margin:0;color:var(--muted);font-size:1.05rem}
+    .grid{display:grid;gap:24px}
+    .card{
+      background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+      padding:30px;box-shadow:0 12px 34px rgba(17,24,39,.05)
+    }
+    .card h3{margin:0 0 12px;color:var(--navy);font-size:1.25rem}
+    .card p{margin:0;color:var(--muted)}
+    .icon{
+      width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+      background:linear-gradient(135deg,#eef2ff,#f5f3ff);
+      color:var(--primary);font-size:1.35rem;margin-bottom:18px
+    }
+
+    .subject-icon{
+      width:auto;min-width:64px;height:52px;padding:0 16px;
+      border-radius:16px;font-size:1rem;font-weight:900;letter-spacing:-.03em
+    }
+    .subject-icon.wide{min-width:88px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      border-radius:14px;padding:15px 22px;font-weight:800;
+      border:1px solid transparent;transition:.2s ease
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff;box-shadow:0 12px 30px rgba(79,70,229,.28)
+    }
+    .btn-outline{border-color:#c7d2fe;background:#fff;color:var(--primary)}
+    .btn-dark{background:var(--navy);color:#fff}
+    .pill{
+      display:inline-flex;padding:7px 12px;border-radius:999px;
+      background:#eef2ff;color:var(--primary-dark);font-weight:800;font-size:.84rem
+    }
+
+    .header{
+      position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);
+      backdrop-filter:blur(16px);border-bottom:1px solid rgba(229,231,235,.85)
+    }
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;color:var(--navy);letter-spacing:-.04em}
+    .brand-mark{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      color:#fff;background:linear-gradient(135deg,var(--primary),var(--secondary));font-weight:900
+    }
+    .nav-links{display:flex;align-items:center;gap:25px;font-weight:700;color:#4b5563;font-size:.94rem}
+    .nav-links a:hover{color:var(--primary)}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .menu-btn{display:none;border:0;background:#eef2ff;color:var(--primary);width:44px;height:44px;border-radius:12px;font-size:1.25rem}
+
+    .hero{
+      position:relative;overflow:hidden;
+      background:
+        radial-gradient(circle at 10% 10%,rgba(124,58,237,.14),transparent 34%),
+        radial-gradient(circle at 88% 10%,rgba(79,70,229,.18),transparent 28%),
+        linear-gradient(180deg,#fafaff 0%,#fff 100%);
+      padding:86px 0 72px
+    }
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+    .hero h1{
+      font-size:clamp(2.7rem,6vw,5.2rem);line-height:1.08;
+      margin:16px 0 24px;color:var(--navy);letter-spacing:-.065em
+    }
+    .hero h1 span{
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      -webkit-background-clip:text;background-clip:text;color:transparent
+    }
+    .hero-copy{font-size:1.12rem;color:var(--muted);max-width:700px;margin-bottom:30px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:34px}
+    .hero-points{display:flex;flex-wrap:wrap;gap:16px;color:#4b5563;font-weight:700;font-size:.94rem}
+    .hero-points span::before{content:"✓";color:var(--success);margin-right:8px;font-weight:900}
+    .hero-panel{
+      background:rgba(255,255,255,.9);border:1px solid rgba(199,210,254,.8);
+      border-radius:32px;padding:28px;box-shadow:var(--shadow)
+    }
+    .score-box{
+      padding:24px;border-radius:22px;
+      background:linear-gradient(135deg,#312e81,#6d28d9);color:#fff;margin-bottom:20px
+    }
+    .score-box strong{font-size:clamp(1.5rem,3vw,2.25rem);line-height:1.3}
+    .score-box small{display:block;opacity:.8;margin-bottom:8px}
+    .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .mini-card{padding:18px;border-radius:18px;background:#f8fafc;border:1px solid var(--line)}
+    .mini-card b{display:block;color:var(--navy);margin-bottom:5px}
+    .mini-card span{color:var(--muted);font-size:.9rem}
+
+    .stats{padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .stat{text-align:center;padding:12px}
+    .stat strong{display:block;color:var(--navy);font-size:1.45rem}
+    .stat span{color:var(--muted);font-size:.92rem}
+
+    .program-grid{grid-template-columns:repeat(4,1fr);margin-top:42px}
+    .program-list{list-style:none;padding:0;margin:18px 0 0}
+    .program-list li{padding:8px 0;border-bottom:1px dashed var(--line);font-size:.94rem;color:#4b5563}
+
+    .tabs-wrap{margin-top:42px}
+    .tab-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+    .tab-btn{
+      border:1px solid var(--line);background:#fff;color:#4b5563;
+      padding:12px 18px;border-radius:999px;font-weight:800
+    }
+    .tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+    .subject-grid{grid-template-columns:repeat(3,1fr)}
+    .subject-card{min-height:220px}
+    .subject-card ul{margin:16px 0 0;padding-left:20px;color:#4b5563}
+    .subject-card li{margin:8px 0}
+
+    .process-grid{grid-template-columns:repeat(5,1fr);margin-top:44px}
+    .process-card{position:relative;padding-top:62px}
+    .process-no{
+      position:absolute;top:22px;left:24px;width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;background:var(--navy);color:#fff;font-weight:900;font-size:.85rem
+    }
+
+
+    .region-intro{
+      margin-top:34px;padding:28px;border:1px solid var(--line);border-radius:28px;
+      background:linear-gradient(180deg,#fff,#f8fafc);box-shadow:var(--shadow)
+    }
+    .region-intro-head{
+      display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:20px
+    }
+    .region-intro-head h3{margin:0;color:var(--navy);font-size:1.45rem}
+    .region-intro-head p{margin:5px 0 0;color:var(--muted)}
+    .region-buttons{
+      display:grid;grid-template-columns:repeat(6,1fr);gap:12px
+    }
+    .region-card{
+      border:1px solid var(--line);border-radius:17px;background:#fff;
+      padding:17px 12px;text-align:center;font-weight:900;color:var(--navy);
+      transition:.2s ease
+    }
+    .region-card:hover,.region-card.active{
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff;border-color:transparent;transform:translateY(-2px);
+      box-shadow:0 12px 26px rgba(79,70,229,.20)
+    }
+    .region-card small{
+      display:block;margin-top:3px;font-size:.78rem;font-weight:700;
+      color:var(--muted)
+    }
+    .region-card.active small,.region-card:hover small{color:rgba(255,255,255,.78)}
+    .branch-explore{display:none}
+    .branch-explore.open{display:block}
+    .branch-help{
+      margin:16px 0 0;padding:13px 16px;border-radius:14px;
+      background:#eef2ff;color:#3730a3;font-weight:800;font-size:.92rem
+    }
+    .branch-back{
+      display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;
+      color:var(--primary);font-weight:900;padding:0;margin-bottom:15px
+    }
+
+    .inline-consult{
+      margin:42px 0 0;padding:30px;border-radius:28px;
+      background:linear-gradient(135deg,#111827,#312e81 60%,#5b21b6);
+      color:#fff;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center
+    }
+    .inline-consult h3{margin:0 0 8px;font-size:1.55rem;letter-spacing:-.04em}
+    .inline-consult p{margin:0;color:rgba(255,255,255,.72)}
+    .inline-consult-actions{display:flex;flex-wrap:wrap;gap:10px}
+    .inline-consult .btn-outline{background:#fff}
+
+    .local-content{
+      margin-top:24px;padding:24px;border-radius:20px;
+      background:linear-gradient(180deg,#f8fafc,#fff);border:1px solid var(--line)
+    }
+    .local-content h4{margin:0 0 12px;color:var(--navy);font-size:1.2rem}
+    .local-content p{margin:0;color:#475569}
+    .keyword-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .keyword-chip{
+      display:inline-flex;padding:8px 12px;border-radius:999px;
+      background:#eef2ff;color:#3730a3;font-size:.84rem;font-weight:800
+    }
+
+    .branch-box{
+      margin-top:42px;border:1px solid var(--line);border-radius:30px;
+      background:#fff;padding:28px;box-shadow:var(--shadow)
+    }
+    .branch-controls{display:grid;grid-template-columns:1fr 240px;gap:12px;margin-bottom:22px}
+    .control{
+      width:100%;border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+      outline:none;background:#fff
+    }
+    .control:focus{border-color:#818cf8;box-shadow:0 0 0 4px #eef2ff}
+    .branch-meta{
+      display:flex;justify-content:space-between;gap:16px;align-items:center;
+      margin:0 0 18px;color:var(--muted);font-size:.9rem
+    }
+    .branch-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .branch-item{
+      padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fafafa;
+      display:flex;justify-content:space-between;gap:12px;align-items:center;
+      cursor:pointer;transition:.2s ease
+    }
+    .branch-item:hover{
+      transform:translateY(-2px);border-color:#a5b4fc;background:#f5f3ff;
+      box-shadow:0 10px 24px rgba(79,70,229,.10)
+    }
+    .branch-item b{color:var(--navy)}
+    .branch-item span{color:var(--muted);font-size:.82rem;text-align:right}
+    .branch-empty,.branch-loading{grid-column:1/-1;text-align:center;padding:36px;color:var(--muted)}
+    .branch-error{
+      grid-column:1/-1;padding:18px;border-radius:14px;
+      background:#fff7ed;color:#9a3412;border:1px solid #fed7aa
+    }
+
+    .consult-grid{
+      display:grid;grid-template-columns:.82fr 1.18fr;gap:34px;align-items:start;margin-top:42px
+    }
+    .contact-info{
+      background:linear-gradient(135deg,#1e1b4b,#4c1d95 58%,#6d28d9);
+      color:#fff;border-radius:30px;padding:36px;position:sticky;top:102px
+    }
+    .contact-info h3{font-size:2rem;line-height:1.3;margin:14px 0}
+    .contact-info p{color:rgba(255,255,255,.75)}
+    .contact-phone{font-size:2rem;font-weight:950;margin:24px 0 16px}
+    .contact-info .btn{width:100%;margin-top:10px}
+    .consult-form{
+      border:1px solid var(--line);border-radius:30px;background:#fff;padding:32px;
+      box-shadow:var(--shadow)
+    }
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .field{display:grid;gap:8px}
+    .field.full{grid-column:1/-1}
+    .field label{font-weight:800;color:var(--navy);font-size:.94rem}
+    .required::after{content:" *";color:var(--danger)}
+    .input{
+      width:100%;border:1px solid var(--line);border-radius:13px;
+      padding:14px 15px;outline:none;background:#fff
+    }
+    .input:focus{border-color:#818cf8;box-shadow:0 0 0 4px #eef2ff}
+    textarea.input{min-height:110px;resize:vertical}
+    .radio-row,.check-row{display:flex;flex-wrap:wrap;gap:10px 18px}
+    .choice{
+      display:flex;align-items:center;gap:7px;padding:10px 13px;
+      border:1px solid var(--line);border-radius:12px;background:#fafafa
+    }
+    .address-row{display:grid;grid-template-columns:1fr auto;gap:10px}
+    .privacy-box{
+      max-height:180px;overflow:auto;background:#f8fafc;border:1px solid var(--line);
+      border-radius:14px;padding:16px;color:#4b5563;font-size:.88rem
+    }
+    .privacy-agree{display:flex;align-items:flex-start;gap:10px;font-weight:800;color:var(--navy)}
+    .submit-btn{width:100%;margin-top:6px}
+    .form-status{display:none;margin-top:14px;padding:14px;border-radius:12px;font-weight:700}
+    .form-status.show{display:block}
+    .form-status.success{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+    .form-status.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+    .honeypot{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+
+    .faq-list{margin-top:40px;display:grid;gap:14px}
+    .faq-item{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
+    .faq-q{
+      width:100%;border:0;background:#fff;text-align:left;padding:20px 22px;
+      display:flex;align-items:center;justify-content:space-between;gap:20px;
+      font-weight:900;color:var(--navy)
+    }
+    .faq-a{display:none;padding:0 22px 22px;color:var(--muted)}
+    .faq-item.open .faq-a{display:block}
+
+    footer{background:#0f172a;color:#cbd5e1;padding:46px 0 26px}
+    .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:28px}
+    .footer-title{color:#fff;font-weight:900;margin-bottom:12px}
+    .footer-links{display:grid;gap:8px;color:#94a3b8;font-size:.94rem}
+    .copyright{border-top:1px solid rgba(148,163,184,.18);margin-top:34px;padding-top:22px;color:#64748b;font-size:.86rem}
+    .floating-call{
+      position:fixed;right:22px;bottom:22px;z-index:900;width:62px;height:62px;border-radius:50%;
+      display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff;box-shadow:0 16px 38px rgba(79,70,229,.38);font-size:1.35rem
+    }
+
+    body.modal-open{overflow:hidden}
+    .branch-modal{
+      position:fixed;inset:0;z-index:2500;display:none;align-items:center;justify-content:center;
+      padding:24px;background:rgba(15,23,42,.66);backdrop-filter:blur(7px)
+    }
+    .branch-modal.open{display:flex}
+    .branch-modal-dialog{
+      width:min(980px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:28px;
+      box-shadow:0 30px 80px rgba(15,23,42,.30)
+    }
+    .branch-modal-head{
+      position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;
+      gap:18px;padding:26px 28px;background:#fff;border-bottom:1px solid var(--line);
+      border-radius:28px 28px 0 0
+    }
+    .branch-modal-head h3{
+      margin:5px 0 2px;color:var(--navy);font-size:clamp(1.65rem,3vw,2.35rem);letter-spacing:-.04em
+    }
+    .branch-modal-head p{margin:0;color:var(--muted)}
+    .modal-close{
+      flex:0 0 auto;width:44px;height:44px;border:0;border-radius:13px;
+      background:#eef2ff;color:var(--primary);font-size:1.35rem;font-weight:900
+    }
+    .branch-modal-body{padding:28px}
+    .detail-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+    .detail-summary-card{
+      padding:20px;border:1px solid var(--line);border-radius:18px;
+      background:linear-gradient(180deg,#ffffff,#f8fafc)
+    }
+    .detail-summary-card small{display:block;color:var(--muted);margin-bottom:7px}
+    .detail-summary-card strong{color:var(--navy);font-size:1.05rem;line-height:1.5}
+
+    .detail-section{
+      border:1px solid var(--line);border-radius:22px;overflow:hidden;
+      margin-bottom:22px;background:#fff
+    }
+    .detail-section-title{
+      background:linear-gradient(135deg,#111827,#312e81);
+      color:#fff;text-align:center;font-weight:900;
+      padding:15px 18px;letter-spacing:-.02em
+    }
+    .detail-table{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .detail-row{
+      display:grid;grid-template-columns:150px 1fr;min-height:58px;
+      border-bottom:1px solid var(--line)
+    }
+    .detail-row:nth-child(odd){border-right:1px solid var(--line)}
+    .detail-label{
+      padding:15px;background:#f8fafc;color:#334155;font-weight:850;
+      display:flex;align-items:center
+    }
+    .detail-value{
+      padding:15px;color:var(--navy);white-space:pre-wrap;overflow-wrap:anywhere;
+      display:flex;align-items:center
+    }
+    .grade-section{padding:0}
+    .subject-grade-table{display:grid}
+    .subject-grade-row{
+      display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid var(--line)
+    }
+    .subject-grade-row:last-child{border-bottom:0}
+    .subject-grade-name{
+      padding:16px;background:#f8fafc;color:#1f2937;font-weight:900;
+      display:flex;align-items:center
+    }
+    .grade-chip-wrap{
+      padding:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center
+    }
+    .grade-chip{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:56px;padding:8px 14px;border-radius:999px;
+      background:#4f46e5;color:#fff;font-weight:900;font-size:.88rem
+    }
+    .detail-empty{color:var(--muted)}
+    .map-wrap{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#f8fafc}
+    .map-wrap iframe{width:100%;height:360px;border:0;display:block}
+    .map-placeholder{display:grid;place-items:center;min-height:240px;padding:30px;text-align:center;color:var(--muted)}
+    .modal-actions{display:flex;flex-wrap:wrap;gap:10px;padding-top:20px}
+    .modal-actions .btn{flex:1;min-width:180px}
+
+    .mobile-menu{display:none}
+
+    @media (max-width:1024px){
+      .nav-links{display:none}
+      .menu-btn{display:grid;place-items:center}
+      .nav-actions .btn-outline{display:none}
+      .hero-grid,.consult-grid{grid-template-columns:1fr}
+      .contact-info{position:static}
+      .program-grid{grid-template-columns:repeat(2,1fr)}
+      .subject-grid{grid-template-columns:repeat(2,1fr)}
+      .process-grid{grid-template-columns:repeat(3,1fr)}
+      .branch-list{grid-template-columns:repeat(3,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .mobile-menu{
+        position:absolute;top:76px;left:0;right:0;background:#fff;
+        border-bottom:1px solid var(--line);padding:18px 20px;box-shadow:var(--shadow)
+      }
+      .mobile-menu.open{display:grid;gap:10px}
+      .mobile-menu a{padding:12px;border-radius:10px;font-weight:800}
+    }
+    @media (max-width:720px){
+      .container{width:min(100% - 28px,1160px)}
+      .section{padding:72px 0}
+      .hero{padding:62px 0 56px}
+      .hero-actions{flex-direction:column}
+      .hero-actions .btn{width:100%}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .program-grid,.subject-grid,.process-grid,.footer-grid{grid-template-columns:1fr}
+      .branch-controls,.branch-list,.form-grid{grid-template-columns:1fr}
+      .region-buttons{grid-template-columns:repeat(3,1fr)}
+      .inline-consult{grid-template-columns:1fr}
+      .inline-consult-actions .btn{width:100%}
+      .field.full{grid-column:auto}
+      .nav-actions .btn-primary{display:none}
+      .mini-grid{grid-template-columns:1fr}
+      .branch-meta{align-items:flex-start;flex-direction:column}
+      .consult-form{padding:22px}
+      .address-row{grid-template-columns:1fr}
+      .branch-modal{padding:10px}
+      .detail-summary{grid-template-columns:1fr}
+      .region-buttons{grid-template-columns:repeat(2,1fr)}
+      .branch-modal-dialog{max-height:96vh;border-radius:20px}
+      .branch-modal-head{padding:20px;border-radius:20px 20px 0 0}
+      .branch-modal-body{padding:18px}
+      .detail-summary{grid-template-columns:repeat(2,1fr)}
+      .detail-table{grid-template-columns:1fr}
+      .detail-row{grid-template-columns:118px 1fr;border-right:0!important}
+      .subject-grade-row{grid-template-columns:95px 1fr}
+      .grade-chip{min-width:48px;padding:7px 11px;font-size:.82rem}
+      .map-wrap iframe{height:300px}
+    }
+  </style>
+</head>
+
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <span class="brand-mark">W</span>
+      <span>와와학습코칭센터</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#program">수업 안내</a>
+      <a href="#subjects">학년·과목</a>
+      <a href="#system">관리 시스템</a>
+      <a href="#branches">지점 찾기</a>
+      <a href="#consult">상담 신청</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline" href="tel:01095661590">전화 문의</a>
+      <a class="btn btn-primary" href="#consult">상담 신청</a>
+      <button class="menu-btn" id="menuBtn" aria-label="메뉴">☰</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#program">수업 안내</a>
+    <a href="#subjects">학년·과목</a>
+    <a href="#system">관리 시스템</a>
+    <a href="#branches">지점 찾기</a>
+    <a href="#consult">상담 신청</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">초등 · 중등 · 고등 맞춤 학습코칭</span>
+        <h1>학생마다 다른 공부,<br><span>관리 방식도 달라야 합니다.</span></h1>
+        <p class="hero-copy">
+          와와학습코칭센터는 학생의 현재 수준, 학교 진도, 시험 일정, 공부 습관을 함께 점검합니다.
+          영어·수학 중심 학습부터 국어·과학·사회, 수행평가, 오답 정리, 주간 계획까지
+          학생에게 필요한 관리 항목을 나누어 운영합니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#consult">온라인 상담 신청</a>
+          <a class="btn btn-outline" href="tel:01095661590">☎ 010-9566-1590</a>
+        </div>
+        <div class="hero-points">
+          <span>학생별 진단과 계획</span>
+          <span>학교별 내신 대비</span>
+          <span>오답·복습·수행평가 관리</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="score-box">
+          <small>학습관리 핵심 구조</small>
+          <strong>진단 → 계획 → 실행 → 점검</strong>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card"><b>학습 진단</b><span>개념 이해도와 문제 해결 과정 확인</span></div>
+          <div class="mini-card"><b>주간 계획</b><span>학교 진도와 시험 일정 반영</span></div>
+          <div class="mini-card"><b>과목 관리</b><span>영어·수학·국어·과학·사회</span></div>
+          <div class="mini-card"><b>결과 점검</b><span>오답 원인을 다음 계획에 반영</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat"><strong>초등·중등·고등</strong><span>학년별 맞춤 관리</span></div>
+      <div class="stat"><strong>전과목 점검</strong><span>국어·영어·수학·과학·사회</span></div>
+      <div class="stat"><strong>내신 중심</strong><span>학교 진도와 시험 범위 반영</span></div>
+      <div class="stat"><strong>학습 습관</strong><span>계획·복습·오답 루틴 관리</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="program">
+    <div class="container">
+      <span class="eyebrow">WAWA PROGRAM</span>
+      <h2 class="section-title">공부량보다 먼저 점검해야 할 학습 구조</h2>
+      <p class="section-desc">
+        개념 이해, 문제 적용, 오답 분석, 반복 복습이 연결되도록 학생별 관리 항목을 세분화합니다.
+      </p>
+      <div class="grid program-grid">
+        <article class="card">
+          <div class="icon">◎</div><h3>개별 진단</h3>
+          <p>성적뿐 아니라 문제를 읽는 방식, 풀이 과정, 복습 습관까지 확인합니다.</p>
+          <ul class="program-list"><li>기초 개념 점검</li><li>취약 단원 확인</li><li>학습 시간 점검</li></ul>
+        </article>
+        <article class="card">
+          <div class="icon">▦</div><h3>맞춤 계획</h3>
+          <p>학교 일정과 시험 범위를 기준으로 주간·월간 학습 목표를 설정합니다.</p>
+          <ul class="program-list"><li>교과 진도 반영</li><li>시험 대비 분리</li><li>과목 우선순위 조정</li></ul>
+        </article>
+        <article class="card">
+          <div class="icon">✓</div><h3>실행 관리</h3>
+          <p>수업 이해도, 과제 수행, 문제풀이 정확도, 학습량을 확인합니다.</p>
+          <ul class="program-list"><li>과제 누락 점검</li><li>풀이 과정 확인</li><li>학습 속도 조절</li></ul>
+        </article>
+        <article class="card">
+          <div class="icon">↻</div><h3>오답·복습</h3>
+          <p>틀린 이유를 분류해 다음 학습 계획과 시험 전 복습에 반영합니다.</p>
+          <ul class="program-list"><li>개념과 실수 구분</li><li>유형별 재풀이</li><li>시험 전 반복</li></ul>
+        </article>
+      </div>
+
+      <div class="inline-consult">
+        <div>
+          <h3>학생의 현재 학습 상태부터 확인해 보세요</h3>
+          <p>학년, 학교, 희망 과목과 가까운 지점을 입력하면 상담 신청서가 지정된 구글시트로 접수됩니다.</p>
+        </div>
+        <div class="inline-consult-actions">
+          <a class="btn btn-primary" href="#consult">상담 신청서 작성</a>
+          <a class="btn btn-outline" href="sms:01095661590">문자 작성</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section soft" id="subjects">
+    <div class="container">
+      <span class="eyebrow">GRADE & SUBJECT</span>
+      <h2 class="section-title">학년이 달라지면 관리 기준도 달라집니다</h2>
+      <p class="section-desc">
+        초등은 공부 습관과 기초 개념, 중등은 내신과 수행평가,
+        고등은 내신·모의고사·수능 연계를 중심으로 학습 방향을 조정합니다.
+      </p>
+      <div class="tabs-wrap">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="elementary">초등학생</button>
+          <button class="tab-btn" data-tab="middle">중학생</button>
+          <button class="tab-btn" data-tab="high">고등학생</button>
+          <button class="tab-btn" data-tab="allSubjects">과목별 안내</button>
+        </div>
+
+        <div class="tab-panel active" id="elementary">
+          <div class="grid subject-grid">
+            <article class="card subject-card"><div class="icon subject-icon">국어</div><h3>초등 국어</h3><ul><li>교과 독해와 어휘</li><li>핵심 내용 찾기</li><li>서술형 문장 쓰기</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon">영어</div><h3>초등 영어</h3><ul><li>파닉스와 기초 어휘</li><li>문장 읽기와 문법</li><li>교과서 복습</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon">수학</div><h3>초등 수학</h3><ul><li>연산 정확도</li><li>개념과 문장제</li><li>취약 단원 보완</li></ul></article>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="middle">
+          <div class="grid subject-grid">
+            <article class="card subject-card"><div class="icon subject-icon">국어</div><h3>중등 국어</h3><ul><li>문학·비문학 독해</li><li>문법과 학교별 시험 유형</li><li>서술형 답안 구성</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon">영어</div><h3>중등 영어</h3><ul><li>교과서 본문과 핵심 문법</li><li>어휘·독해·서술형</li><li>학교별 기출 유형 점검</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon">수학</div><h3>중등 수학</h3><ul><li>개념·유형·심화</li><li>방정식·함수·도형</li><li>풀이 과정과 계산 실수</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon wide">과학·사회</div><h3>중등 과학·사회</h3><ul><li>핵심 용어와 개념 연결</li><li>자료 해석과 서술형</li><li>수행평가 일정 관리</li></ul></article>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="high">
+          <div class="grid subject-grid">
+            <article class="card subject-card"><div class="icon subject-icon">국어</div><h3>고등 국어</h3><ul><li>내신 작품과 교과서</li><li>비문학 독해 구조화</li><li>모의고사·수능 연계</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon">영어</div><h3>고등 영어</h3><ul><li>교과서·부교재 분석</li><li>어법·빈칸·순서·삽입</li><li>내신과 모의고사 병행</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon">수학</div><h3>고등 수학</h3><ul><li>수학Ⅰ·수학Ⅱ·미적분</li><li>개념 적용과 고난도</li><li>시간 배분과 오답 관리</li></ul></article>
+            <article class="card subject-card"><div class="icon subject-icon wide">탐구</div><h3>탐구·수행평가</h3><ul><li>통합과학과 선택과목</li><li>자료 분석과 서술형</li><li>학교별 일정 확인</li></ul></article>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="allSubjects">
+          <div class="grid subject-grid">
+            <article class="card subject-card"><div class="icon subject-icon">국어</div><h3>국어</h3><p>독해, 문학, 비문학, 문법, 어휘, 서술형, 내신·모의고사 대비</p></article>
+            <article class="card subject-card"><div class="icon subject-icon">영어</div><h3>영어</h3><p>어휘, 문법, 독해, 교과서 본문, 서술형, 내신·모의고사 대비</p></article>
+            <article class="card subject-card"><div class="icon subject-icon">수학</div><h3>수학</h3><p>연산, 개념, 유형, 심화, 서술형, 오답 분석, 시험 시간 관리</p></article>
+            <article class="card subject-card"><div class="icon subject-icon">과학</div><h3>과학</h3><p>개념 연결, 탐구 자료 해석, 실험 과정, 서술형, 통합과학·선택과목</p></article>
+            <article class="card subject-card"><div class="icon subject-icon">사회</div><h3>사회</h3><p>핵심 개념, 시대·지역 흐름, 자료 해석, 암기 구조화, 수행평가</p></article>
+            <article class="card subject-card"><div class="icon subject-icon wide">학습관리</div><h3>학습관리</h3><p>주간 계획, 과제, 오답, 복습, 수행평가, 시험 일정, 학습 습관</p></article>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline-consult">
+        <div>
+          <h3>과목과 학년에 맞는 관리 방향이 궁금한가요?</h3>
+          <p>상담 신청서에 학생 학년과 수업 희망 과목을 남기면 필요한 관리 범위를 확인할 수 있습니다.</p>
+        </div>
+        <div class="inline-consult-actions">
+          <a class="btn btn-primary" href="#consult">상담 신청하기</a>
+          <a class="btn btn-outline" href="tel:01095661590">전화 문의</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="system">
+    <div class="container">
+      <span class="eyebrow">COACHING SYSTEM</span>
+      <h2 class="section-title">학습이 끊기지 않도록 이어주는 관리 단계</h2>
+      <div class="grid process-grid">
+        <article class="card process-card"><span class="process-no">01</span><h3>상담·진단</h3><p>학년, 과목, 성적, 공부 습관, 시험 일정, 목표를 확인합니다.</p></article>
+        <article class="card process-card"><span class="process-no">02</span><h3>계획 설계</h3><p>학교 진도와 취약 단원을 기준으로 주간 학습량을 설정합니다.</p></article>
+        <article class="card process-card"><span class="process-no">03</span><h3>개별 수업</h3><p>이해 속도와 문제 해결 과정에 맞추어 설명과 연습을 조절합니다.</p></article>
+        <article class="card process-card"><span class="process-no">04</span><h3>오답 점검</h3><p>개념, 조건 해석, 계산, 시간 부족 등 틀린 이유를 구분합니다.</p></article>
+        <article class="card process-card"><span class="process-no">05</span><h3>재계획</h3><p>학습 결과와 미완료 항목을 다음 주 계획에 반영합니다.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft" id="branches">
+    <div class="container">
+      <span class="eyebrow">BRANCH FINDER</span>
+      <h2 class="section-title">가까운 와와학습코칭센터 찾기</h2>
+      <p class="section-desc">
+        아래 목록은 제공된 지점 구글시트에서 실시간으로 불러옵니다.
+        시트가 수정되면 웹페이지 지점 목록도 새로고침 후 반영됩니다.
+      </p>
+
+      <div style="margin-top:20px">
+        <a class="btn btn-outline" href="https://map.kakao.com/?map_type=TYPE_MAP&folderid=3459092&target=other&page=bookmark" target="_blank" rel="noopener">
+          카카오맵에서 전체 지점 보기
+        </a>
+      </div>
+
+      <div class="region-intro">
+        <div class="region-intro-head">
+          <div>
+            <h3>지역을 먼저 선택해 주세요</h3>
+            <p>선택한 지역의 지점만 간단하게 확인할 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="region-buttons" id="regionButtons">
+          <div class="branch-loading">지역 정보를 불러오는 중입니다.</div>
+        </div>
+      </div>
+
+      <div class="branch-explore" id="branchExplore">
+        <div class="branch-box">
+          <button class="branch-back" id="branchBackBtn" type="button">← 지역 다시 선택</button>
+
+          <div class="branch-controls">
+            <input class="control" id="branchSearch" type="search" placeholder="지점명·주소·교육지원청·가능과목 검색">
+            <select class="control" id="regionFilter">
+              <option value="">전체 지역</option>
+            </select>
+          </div>
+
+          <div class="branch-meta">
+            <span id="branchCount">지점 정보를 불러오는 중입니다.</span>
+            <button class="btn btn-outline" id="reloadBranches" type="button">지점정보 새로고침</button>
+          </div>
+
+          <div class="branch-help">
+            지점 카드를 누르면 수업 가능 학년, 과목, 교육지원청 정보, 학교 정보, 지도와 지역별 학습 안내를 상세하게 볼 수 있습니다.
+          </div>
+
+          <div class="branch-list" id="branchList">
+            <div class="branch-loading">지점 구글시트를 불러오는 중입니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline-consult">
+        <div>
+          <h3>가까운 지점을 찾았다면 상담 신청서를 남겨 주세요</h3>
+          <p>지점 상세보기에서 선택한 지점이 상담 신청서에 자동으로 입력됩니다.</p>
+        </div>
+        <div class="inline-consult-actions">
+          <a class="btn btn-primary" href="#consult">상담 신청서 작성</a>
+          <a class="btn btn-outline" href="sms:01095661590">010-9566-1590 문자 작성</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="consult">
+    <div class="container">
+      <span class="eyebrow">CONSULTATION</span>
+      <h2 class="section-title">와와학습코칭센터 상담 신청</h2>
+      <p class="section-desc">
+        입력한 상담 정보는 지정한 구글시트에 저장됩니다.
+        지점과 학생 정보를 확인한 뒤 상담 가능한 시간에 연락드립니다.
+      </p>
+
+      <div class="consult-grid">
+        <aside class="contact-info">
+          <span class="pill">상담 안내</span>
+          <h3>학생에게 필요한 관리 범위를 먼저 확인합니다.</h3>
+          <p>학년, 학교, 희망 과목, 가까운 지점과 현재 학습 상황을 입력해 주세요.</p>
+          <div class="contact-phone">010-9566-1590</div>
+          <a class="btn btn-primary" href="tel:01095661590">전화 연결</a>
+          <a class="btn btn-outline" href="sms:01095661590" style="background:#fff">010-9566-1590 문자 작성</a>
+          <p style="font-size:.88rem;margin-top:18px">수업 중에는 바로 응대하기 어려울 수 있습니다.</p>
+        </aside>
+
+        <form class="consult-form" id="consultForm">
+          <div class="form-grid">
+            <div class="field">
+              <label class="required" for="branchName">지점명</label>
+              <select class="input" id="branchName" name="branchName" required>
+                <option value="">지점을 선택해 주세요</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="required" for="studentName">학생명</label>
+              <input class="input" id="studentName" name="studentName" maxlength="30" required>
+            </div>
+
+            <div class="field">
+              <label class="required" for="grade">학년</label>
+              <select class="input" id="grade" name="grade" required>
+                <option value="">학년 선택</option>
+                <optgroup label="초등학생">
+                  <option>초등 1학년</option><option>초등 2학년</option><option>초등 3학년</option>
+                  <option>초등 4학년</option><option>초등 5학년</option><option>초등 6학년</option>
+                </optgroup>
+                <optgroup label="중학생">
+                  <option>중등 1학년</option><option>중등 2학년</option><option>중등 3학년</option>
+                </optgroup>
+                <optgroup label="고등학생">
+                  <option>고등 1학년</option><option>고등 2학년</option><option>고등 3학년</option>
+                </optgroup>
+                <option>재수·N수</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="required">성별</label>
+              <div class="radio-row">
+                <label class="choice"><input type="radio" name="gender" value="남학생" required> 남학생</label>
+                <label class="choice"><input type="radio" name="gender" value="여학생" required> 여학생</label>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label class="required" for="schoolName">학교명</label>
+              <input class="input" id="schoolName" name="schoolName" maxlength="60" placeholder="재학 중인 학교명을 입력해 주세요" required>
+            </div>
+
+            <div class="field full">
+              <label class="required">수업과목 선택</label>
+              <div class="check-row">
+                <label class="choice"><input type="checkbox" name="subjects" value="국어"> 국어</label>
+                <label class="choice"><input type="checkbox" name="subjects" value="영어"> 영어</label>
+                <label class="choice"><input type="checkbox" name="subjects" value="수학"> 수학</label>
+                <label class="choice"><input type="checkbox" name="subjects" value="과학"> 과학</label>
+                <label class="choice"><input type="checkbox" name="subjects" value="사회"> 사회</label>
+                <label class="choice"><input type="checkbox" name="subjects" value="학습코칭"> 학습코칭</label>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label class="required" for="phone">연락처</label>
+              <input class="input" id="phone" name="phone" inputmode="tel" maxlength="13" placeholder="010-0000-0000" required>
+            </div>
+
+            <div class="field full">
+              <label class="required" for="address">주소</label>
+              <div class="address-row">
+                <input class="input" id="address" name="address" readonly required placeholder="주소검색 버튼을 눌러 주세요">
+                <button class="btn btn-dark" id="addressBtn" type="button">한국 주소 검색</button>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label for="detailAddress">상세주소</label>
+              <input class="input" id="detailAddress" name="detailAddress" maxlength="100" placeholder="동·호수 또는 상세 위치">
+            </div>
+
+            <div class="field full">
+              <label for="memo">상담 메모</label>
+              <textarea class="input" id="memo" name="memo" maxlength="1000" placeholder="현재 학습 상황이나 상담 시 확인할 내용을 입력해 주세요"></textarea>
+            </div>
+
+            <div class="field full">
+              <label class="required">개인정보 수집·이용 안내</label>
+              <div class="privacy-box">
+                <strong>수집 항목</strong><br>
+                지점명, 학생명, 학년, 성별, 학교명, 희망 수업과목, 연락처, 주소, 상세주소, 상담 메모<br><br>
+                <strong>수집 목적</strong><br>
+                와와학습코칭센터 상담 접수, 희망 지점 연결, 수업 안내와 상담 연락<br><br>
+                <strong>보유 기간</strong><br>
+                상담 목적 달성 후 지체 없이 파기하는 것을 원칙으로 하며, 관련 법령에 보존 의무가 있는 경우 해당 기간 동안 보관합니다.<br><br>
+                동의를 거부할 권리가 있으나, 필수 항목 수집에 동의하지 않을 경우 상담 신청이 제한될 수 있습니다.
+              </div>
+              <label class="privacy-agree">
+                <input type="checkbox" id="privacyAgree" name="privacyAgree" value="동의" required>
+                개인정보 수집·이용 내용을 확인했으며 동의합니다.
+              </label>
+            </div>
+
+            <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off">
+
+            <div class="field full">
+              <button class="btn btn-primary submit-btn" id="submitBtn" type="submit">상담 신청서 제출</button>
+              <div class="form-status" id="formStatus" role="status"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft" id="faq">
+    <div class="container">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title">상담 전 자주 묻는 질문</h2>
+      <div class="faq-list">
+        <div class="faq-item open"><button class="faq-q"><span>어떤 학생에게 학습코칭이 필요한가요?</span><span>＋</span></button><div class="faq-a">과제와 복습이 자주 누락되거나 시험 준비 순서를 정하지 못하는 학생에게 도움이 될 수 있습니다.</div></div>
+        <div class="faq-item"><button class="faq-q"><span>영어와 수학 외 과목도 관리하나요?</span><span>＋</span></button><div class="faq-a">지점과 학년별 구성에 따라 국어·과학·사회와 수행평가 관리가 함께 진행될 수 있습니다.</div></div>
+        <div class="faq-item"><button class="faq-q"><span>상담은 예약이 필요한가요?</span><span>＋</span></button><div class="faq-a">담당 선생님이 직접 수업하는 시간에는 즉시 상담이 어려울 수 있어 사전 신청을 권합니다.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="branch-modal" id="branchModal" aria-hidden="true">
+    <div class="branch-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="branchModalTitle">
+      <div class="branch-modal-head">
+        <div>
+          <span class="pill" id="branchModalRegion">지점 상세정보</span>
+          <h3 id="branchModalTitle">와와학습코칭센터</h3>
+          <p id="branchModalAddress"></p>
+        </div>
+        <button class="modal-close" id="branchModalClose" type="button" aria-label="닫기">✕</button>
+      </div>
+      <div class="branch-modal-body">
+        <div class="detail-summary" id="branchSummary"></div>
+
+        <section class="detail-section">
+          <div class="detail-section-title">센터 기본 정보</div>
+          <div class="detail-table" id="branchBasicTable"></div>
+        </section>
+
+        <section class="detail-section grade-section">
+          <div class="detail-section-title">수업 가능 과목·학년</div>
+          <div class="subject-grade-table" id="branchGradeTable"></div>
+        </section>
+
+        <section class="detail-section" id="branchExtraSection">
+          <div class="detail-section-title">추가 정보</div>
+          <div class="detail-table" id="branchExtraTable"></div>
+        </section>
+
+        <section class="local-content" id="branchLocalContent">
+          <h4 id="branchLocalTitle">지역별 학습 안내</h4>
+          <p id="branchLocalText"></p>
+          <div class="keyword-chips" id="branchKeywordChips"></div>
+        </section>
+
+        <div class="map-wrap" id="branchMapWrap">
+          <div class="map-placeholder">주소 정보가 있으면 지도가 표시됩니다.</div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="selectBranchConsult" type="button">이 지점으로 상담 신청</button>
+          <a class="btn btn-outline" id="openKakaoMap" href="#" target="_blank" rel="noopener">카카오맵에서 보기</a>
+          <a class="btn btn-outline" id="openKakaoFolder" href="#" target="_blank" rel="noopener">전체 지점 지도</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff;margin-bottom:14px"><span class="brand-mark">W</span><span>와와학습코칭센터</span></div>
+        <p style="color:#94a3b8;max-width:480px;margin:0">초등·중등·고등 맞춤 학습관리와 지점별 상담을 안내합니다.</p>
+      </div>
+      <div><div class="footer-title">바로가기</div><div class="footer-links"><a href="#subjects">학년·과목</a><a href="#branches">지점 찾기</a><a href="#consult">상담 신청</a></div></div>
+      <div><div class="footer-title">상담 문의</div><div class="footer-links"><a href="tel:01095661590">010-9566-1590</a><span>방문 전 상담 예약 권장</span></div></div>
+    </div>
+    <div class="copyright">© <span id="year"></span> 와와학습코칭센터. 지점별 수업 과목과 운영 시간은 다를 수 있습니다.</div>
+  </div>
+</footer>
+
+<a class="floating-call" href="tel:01095661590" aria-label="전화 상담">☎</a>
+
+<script>
+  /* =========================
+     사용자가 수정할 설정값
+     ========================= */
+
+  const BRANCH_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRV4PEjao8ubJEmc9TpvD1TuYa0FObV5vhi9NrTgmzwQnwnq0DS04Z09jNVrkQG98eNgQt3cP2sbnZS/pub?gid=0&single=true&output=csv';
+
+  /*
+    카카오 지도 내부 표시용 JavaScript 키입니다.
+    Kakao Developers에서 앱 생성 → 플랫폼 Web 등록 → JavaScript 키를 복사해 입력하세요.
+    GitHub Pages 주소도 Web 플랫폼 사이트 도메인에 등록해야 합니다.
+  */
+  const KAKAO_MAP_JS_KEY = '2571966a0263843c17baa1ef9558663c';
+
+  // 사용자가 제공한 전체 지점 카카오맵 즐겨찾기 폴더
+  const KAKAO_BRANCH_FOLDER_URL =
+    'https://map.kakao.com/?map_type=TYPE_MAP&folderid=3459092&target=other&page=bookmark';
+
+  /*
+    Apps Script를 웹 앱으로 배포한 뒤 생성되는 /exec 주소를 아래에 입력하세요.
+    예: https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxx/exec
+  */
+  const CONSULT_API_URL = 'https://script.google.com/macros/s/AKfycbxxy8zCiTxAEZs7EomKUaH0GlY6ziIWXDcSdyDZSfrrjN0AFvXlaZXmLeUBbMLaR3XHFg/exec';
+
+  /* =========================
+     기본 UI
+     ========================= */
+
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    menuBtn.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+  });
+
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.textContent = '☰';
+    });
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      button.classList.add('active');
+      document.getElementById(button.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(button => {
+    button.addEventListener('click', () => button.closest('.faq-item').classList.toggle('open'));
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* =========================
+     CSV 파서와 지점 자동 연동
+     ========================= */
+
+  let branchData = [];
+
+  function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let quoted = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const next = text[i + 1];
+
+      if (ch === '"' && quoted && next === '"') {
+        field += '"';
+        i++;
+      } else if (ch === '"') {
+        quoted = !quoted;
+      } else if (ch === ',' && !quoted) {
+        row.push(field.trim());
+        field = '';
+      } else if ((ch === '\n' || ch === '\r') && !quoted) {
+        if (ch === '\r' && next === '\n') i++;
+        row.push(field.trim());
+        if (row.some(cell => cell !== '')) rows.push(row);
+        row = [];
+        field = '';
+      } else {
+        field += ch;
+      }
+    }
+
+    row.push(field.trim());
+    if (row.some(cell => cell !== '')) rows.push(row);
+    return rows;
+  }
+
+  function normalizeHeader(value) {
+    return String(value || '').replace(/\s/g, '').toLowerCase();
+  }
+
+  function findColumn(headers, candidates) {
+    const normalized = headers.map(normalizeHeader);
+    for (const candidate of candidates) {
+      const keyword = normalizeHeader(candidate);
+      const exact = normalized.indexOf(keyword);
+      if (exact >= 0) return exact;
+    }
+    for (const candidate of candidates) {
+      const keyword = normalizeHeader(candidate);
+      const partial = normalized.findIndex(header => header.includes(keyword) || keyword.includes(header));
+      if (partial >= 0) return partial;
+    }
+    return -1;
+  }
+
+  const REGION_RULES = [
+    {label:'서울', patterns:['서울특별시','서울시','서울 ']},
+    {label:'경기', patterns:['경기도','경기 ']},
+    {label:'인천', patterns:['인천광역시','인천시','인천 ']},
+    {label:'부산', patterns:['부산광역시','부산시','부산 ']},
+    {label:'대구', patterns:['대구광역시','대구시','대구 ']},
+    {label:'광주', patterns:['광주광역시','광주시','광주 ']},
+    {label:'대전', patterns:['대전광역시','대전시','대전 ']},
+    {label:'울산', patterns:['울산광역시','울산시','울산 ']},
+    {label:'세종', patterns:['세종특별자치시','세종시','세종 ']},
+    {label:'강원', patterns:['강원특별자치도','강원도','강원 ']},
+    {label:'충북', patterns:['충청북도','충북 ']},
+    {label:'충남', patterns:['충청남도','충남 ']},
+    {label:'전북', patterns:['전북특별자치도','전라북도','전북 ']},
+    {label:'전남', patterns:['전라남도','전남 ']},
+    {label:'경북', patterns:['경상북도','경북 ']},
+    {label:'경남', patterns:['경상남도','경남 ']},
+    {label:'제주', patterns:['제주특별자치도','제주도','제주 ']}
+  ];
+
+  const REGION_ORDER = [
+    '서울','경기','인천','부산','대구','광주','대전','울산','세종',
+    '강원','충북','충남','전북','전남','경북','경남','제주','기타'
+  ];
+
+  function deriveRegion(...values) {
+    const source = values.filter(Boolean).join(' ').replace(/\\s+/g,' ').trim();
+    if (!source) return '기타';
+    for (const rule of REGION_RULES) {
+      if (rule.patterns.some(pattern => source.includes(pattern))) return rule.label;
+    }
+    return '기타';
+  }
+
+  function getFieldValue(raw, aliases) {
+    const entries = Object.entries(raw || {});
+    for (const alias of aliases) {
+      const target = normalizeHeader(alias);
+      const exact = entries.find(([key]) => normalizeHeader(key) === target);
+      if (exact && String(exact[1] || '').trim()) return String(exact[1]).trim();
+    }
+    for (const alias of aliases) {
+      const target = normalizeHeader(alias);
+      const partial = entries.find(([key]) => {
+        const normalized = normalizeHeader(key);
+        return normalized.includes(target) || target.includes(normalized);
+      });
+      if (partial && String(partial[1] || '').trim()) return String(partial[1]).trim();
+    }
+    return '';
+  }
+
+  function buildBranchObjects(rows) {
+    if (!rows.length) return [];
+
+    const headers = rows[0].map(header => String(header || '').trim());
+    const nameIndex = findColumn(headers, ['지점명','센터명','학원명','지점','센터']);
+
+    if (nameIndex < 0) {
+      throw new Error('지점명 열을 찾지 못했습니다. 시트 첫 행에 "지점명" 제목이 있는지 확인해 주세요.');
+    }
+
+    return rows.slice(1)
+      .map(row => {
+        const raw = {};
+        headers.forEach((header, index) => {
+          if (header) raw[header] = String(row[index] || '').trim();
+        });
+
+        const name = String(row[nameIndex] || '').trim();
+        const address = getFieldValue(raw, ['주소','도로명주소','소재지','학원주소','교습소주소','위치']);
+        const address2 = getFieldValue(raw, ['상세주소','주소상세','건물명','층호수']);
+        const explicitRegion = getFieldValue(raw, ['지역','광역지역','시도','시/도','지역명']);
+        const city = getFieldValue(raw, ['시군구','시/군/구','도시','구군','생활권']);
+        const region = deriveRegion(explicitRegion, address, city);
+
+        return {
+          name, region, city, address, address2, raw,
+          grades: getFieldValue(raw, ['수업가능학년','가능학년','수업학년','대상학년','교육대상','수강대상']),
+          subjects: getFieldValue(raw, ['가능과목','수업가능과목','수업과목','교습과목','과목']),
+          office: getFieldValue(raw, ['교육지원청명칭','교육지원청','관할교육지원청','교육청명칭']),
+          registrationNo: getFieldValue(raw, ['교육지원청등록번호','등록번호','학원등록번호','교습소등록번호']),
+          operationDate: getFieldValue(raw, ['운영등록일','등록일','개원일','설립일','운영일']),
+          phone: getFieldValue(raw, ['전화번호','연락처','지점전화','센터전화','대표번호'])
+        };
+      })
+      .filter(item => item.name)
+      .filter((item, index, array) =>
+        array.findIndex(other => other.name === item.name && other.address === item.address) === index
+      )
+      .sort((a, b) => {
+        const regionDiff = REGION_ORDER.indexOf(a.region) - REGION_ORDER.indexOf(b.region);
+        return regionDiff || a.name.localeCompare(b.name, 'ko');
+      });
+  }
+
+  function getRegionLabel(item) {
+    return item.region || '기타';
+  }
+
+  function populateBranchSelect() {
+    const select = document.getElementById('branchName');
+    select.innerHTML = '<option value="">지점을 선택해 주세요</option>';
+
+    branchData.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.name;
+      const sub = [item.region, item.city].filter(Boolean).join(' ');
+      option.textContent = sub ? `${item.name} · ${sub}` : item.name;
+      select.appendChild(option);
+    });
+  }
+
+  function populateRegionFilter() {
+    const select = document.getElementById('regionFilter');
+    const current = select.value;
+    select.innerHTML = '<option value="">전체 지역</option>';
+
+    const availableRegions = new Set(branchData.map(getRegionLabel).filter(Boolean));
+    const regions = REGION_ORDER.filter(region => availableRegions.has(region));
+
+    regions.forEach(region => {
+      const option = document.createElement('option');
+      option.value = region;
+      option.textContent = region;
+      select.appendChild(option);
+    });
+
+    if (regions.includes(current)) select.value = current;
+  }
+
+  function populateRegionButtons() {
+    const wrap = document.getElementById('regionButtons');
+    const counts = {};
+
+    branchData.forEach(item => {
+      const region = getRegionLabel(item);
+      counts[region] = (counts[region] || 0) + 1;
+    });
+
+    const regions = REGION_ORDER.filter(region => counts[region]);
+    wrap.innerHTML = '';
+
+    regions.forEach(region => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'region-card';
+      button.dataset.region = region;
+      button.innerHTML = `${escapeHTML(region)}<small>${counts[region]}개 지점</small>`;
+      button.addEventListener('click', () => selectRegion(region, button));
+      wrap.appendChild(button);
+    });
+  }
+
+  function selectRegion(region, button) {
+    document.querySelectorAll('.region-card').forEach(card => card.classList.remove('active'));
+    if (button) button.classList.add('active');
+
+    const filter = document.getElementById('regionFilter');
+    filter.value = region;
+
+    document.getElementById('branchExplore').classList.add('open');
+    renderBranches();
+
+    setTimeout(() => {
+      document.getElementById('branchExplore').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 50);
+  }
+
+  function resetRegionView() {
+    document.querySelectorAll('.region-card').forEach(card => card.classList.remove('active'));
+    document.getElementById('regionFilter').value = '';
+    document.getElementById('branchSearch').value = '';
+    document.getElementById('branchExplore').classList.remove('open');
+    document.getElementById('regionButtons').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  }
+
+
+  function renderBranches() {
+    const search = document.getElementById('branchSearch').value.trim().toLowerCase();
+    const region = document.getElementById('regionFilter').value;
+    const list = document.getElementById('branchList');
+    const count = document.getElementById('branchCount');
+
+    const filtered = branchData.filter(item => {
+      const rawText = Object.values(item.raw || {}).join(' ');
+      const haystack = [
+        item.name,item.region,item.city,item.address,item.address2,
+        item.grades,item.subjects,item.office,item.registrationNo,
+        item.operationDate,rawText
+      ].join(' ').toLowerCase();
+
+      return (!search || haystack.includes(search)) &&
+             (!region || getRegionLabel(item) === region);
+    });
+
+    count.textContent = `전체 ${branchData.length}개 지점 중 ${filtered.length}개 표시`;
+    list.innerHTML = '';
+
+    if (!filtered.length) {
+      list.innerHTML = '<div class="branch-empty">검색 조건에 맞는 지점이 없습니다.</div>';
+      return;
+    }
+
+    filtered.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'branch-item';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+
+      const location = item.address || [item.region,item.city].filter(Boolean).join(' ');
+      el.innerHTML = `<b>${escapeHTML(item.name)}</b><span>${escapeHTML(location)}</span>`;
+
+      const open = () => openBranchModal(item);
+      el.addEventListener('click', open);
+      el.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open();
+        }
+      });
+
+      list.appendChild(el);
+    });
+  }
+
+  function escapeHTML(value) {
+    return String(value || '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'",'&#039;');
+  }
+
+
+
+  let kakaoMapSdkPromise = null;
+
+  function loadKakaoMapSdk() {
+    if (window.kakao && window.kakao.maps) {
+      return Promise.resolve();
+    }
+
+    if (!KAKAO_MAP_JS_KEY || KAKAO_MAP_JS_KEY.startsWith('여기에_')) {
+      return Promise.reject(new Error('카카오 JavaScript 키가 설정되지 않았습니다.'));
+    }
+
+    if (kakaoMapSdkPromise) return kakaoMapSdkPromise;
+
+    kakaoMapSdkPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src =
+        `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(KAKAO_MAP_JS_KEY)}&libraries=services&autoload=false`;
+      script.onload = () => {
+        kakao.maps.load(() => resolve());
+      };
+      script.onerror = () => reject(new Error('카카오 지도 SDK를 불러오지 못했습니다.'));
+      document.head.appendChild(script);
+    });
+
+    return kakaoMapSdkPromise;
+  }
+
+  async function renderKakaoMap(container, address, branchName) {
+    if (!address) {
+      container.innerHTML =
+        '<div class="map-placeholder">시트에 주소가 입력되면 카카오 지도가 표시됩니다.</div>';
+      return;
+    }
+
+    container.innerHTML =
+      '<div class="map-placeholder">카카오 지도를 불러오는 중입니다.</div>';
+
+    try {
+      await loadKakaoMapSdk();
+
+      container.innerHTML = '<div id="kakaoBranchMap" style="width:100%;height:360px"></div>';
+      const mapNode = document.getElementById('kakaoBranchMap');
+      const geocoder = new kakao.maps.services.Geocoder();
+
+      geocoder.addressSearch(address, function(result, status) {
+        if (status !== kakao.maps.services.Status.OK || !result.length) {
+          container.innerHTML =
+            '<div class="map-placeholder">카카오 지도에서 주소 좌표를 찾지 못했습니다.<br>아래 카카오맵 버튼으로 확인해 주세요.</div>';
+          return;
+        }
+
+        const position = new kakao.maps.LatLng(
+          Number(result[0].y),
+          Number(result[0].x)
+        );
+
+        const map = new kakao.maps.Map(mapNode, {
+          center: position,
+          level: 3
+        });
+
+        const marker = new kakao.maps.Marker({
+          map,
+          position
+        });
+
+        const infoWindow = new kakao.maps.InfoWindow({
+          content:
+            `<div style="padding:8px 12px;white-space:nowrap;font-size:13px;font-weight:700">${escapeHTML(branchName)}</div>`
+        });
+
+        infoWindow.open(map, marker);
+
+        setTimeout(() => {
+          map.relayout();
+          map.setCenter(position);
+        }, 100);
+      });
+    } catch (error) {
+      console.error(error);
+      container.innerHTML =
+        '<div class="map-placeholder">카카오 지도를 홈페이지 안에 표시하려면 Kakao Developers의 JavaScript 키와 사이트 도메인 등록이 필요합니다.<br>아래 카카오맵 버튼은 키 없이 사용할 수 있습니다.</div>';
+    }
+  }
+
+  const branchModal = document.getElementById('branchModal');
+  const branchModalClose = document.getElementById('branchModalClose');
+  let activeBranch = null;
+
+  function makeSummaryCard(label, value) {
+    return `<div class="detail-summary-card"><small>${escapeHTML(label)}</small><strong>${escapeHTML(value || '-')}</strong></div>`;
+  }
+
+  function openBranchModal(item) {
+    activeBranch = item;
+
+    document.getElementById('branchModalRegion').textContent = item.region || '지점 상세정보';
+    document.getElementById('branchModalTitle').textContent = item.name;
+    document.getElementById('branchModalAddress').textContent =
+      [item.address,item.address2].filter(Boolean).join(' ') || '주소 정보 없음';
+
+    const topLocation = getFieldValue(item.raw, [
+      '위치안내','위치 안내','센터위치','센터 위치','주소','도로명주소','소재지'
+    ]) || [item.address,item.address2].filter(Boolean).join(' ') || '-';
+
+    const elementarySchools = getFieldValue(item.raw, [
+      '수업학교(초등)','수업학교(초)','타겟학교(초)','타깃학교(초)',
+      '초등학교','초등학교정보','초등 학교'
+    ]) || '-';
+
+    const middleSchools = getFieldValue(item.raw, [
+      '수업학교(중등)','수업학교(중)','타겟학교(중)','타깃학교(중)',
+      '중학교','중학교정보','중등학교'
+    ]) || '-';
+
+    const highSchools = getFieldValue(item.raw, [
+      '수업학교(고등)','수업학교(고)','타겟학교(고)','타깃학교(고)',
+      '고등학교','고등학교정보','고등 학교'
+    ]) || '-';
+
+    document.getElementById('branchSummary').innerHTML =
+      makeSummaryCard('위치', topLocation) +
+      makeSummaryCard('초등학교', elementarySchools) +
+      makeSummaryCard('중학교', middleSchools) +
+      makeSummaryCard('고등학교', highSchools);
+
+    const basicDefinitions = [
+      ['교육지원청 명칭',['교육지원청명칭','교육지원청','관할교육지원청','교육청명칭']],
+      ['교육지원청 등록번호',['교육지원청등록번호','등록번호','학원등록번호','교습소등록번호']],
+      ['운영 등록일',['운영등록일','등록일','개원일','설립일','운영일']],
+      ['주소',['주소','도로명주소','소재지','학원주소','교습소주소','위치']],
+      ['상세주소',['상세주소','주소상세','건물명','층호수']],
+      ['오픈시간',['오픈시간','운영시간','수업시간','상담시간']],
+      ['전화번호',['전화번호','연락처','지점전화','센터전화','대표번호']]
+    ];
+
+    const basicRows = [];
+    const usedHeaders = new Set();
+
+    basicDefinitions.forEach(([label, aliases]) => {
+      const value = getFieldValue(item.raw, aliases);
+      if (!value) return;
+
+      const matched = Object.keys(item.raw).find(header =>
+        aliases.some(alias => {
+          const a = normalizeHeader(alias);
+          const h = normalizeHeader(header);
+          return h === a || h.includes(a) || a.includes(h);
+        })
+      );
+      if (matched) usedHeaders.add(matched);
+      basicRows.push([label, value]);
+    });
+
+    document.getElementById('branchBasicTable').innerHTML = basicRows.length
+      ? basicRows.map(([label,value]) => `
+          <div class="detail-row">
+            <div class="detail-label">${escapeHTML(label)}</div>
+            <div class="detail-value">${escapeHTML(value)}</div>
+          </div>`).join('')
+      : '<div class="detail-row"><div class="detail-label">기본 정보</div><div class="detail-value detail-empty">등록된 정보가 없습니다.</div></div>';
+
+    function splitGrades(value) {
+      return String(value || '')
+        .split(/[,/·|]+/)
+        .map(v => v.trim())
+        .filter(Boolean);
+    }
+
+    const subjectDefinitions = [
+      ['국어',['가능학년(국어)','국어가능학년','국어 수업가능학년','국어']],
+      ['영어',['가능학년(영어)','영어가능학년','영어 수업가능학년']],
+      ['수학',['가능학년(수학)','수학가능학년','수학 수업가능학년']],
+      ['과학',['가능학년(과학)','과학가능학년','과학 수업가능학년']],
+      ['사회',['가능학년(사회)','사회가능학년','사회 수업가능학년']]
+    ];
+
+    const overallGrades = getFieldValue(item.raw, [
+      '수업가능학년','가능학년','수업학년','대상학년','교육대상','수강대상'
+    ]);
+
+    const subjectRows = [];
+
+    subjectDefinitions.forEach(([subject, aliases]) => {
+      const value = getFieldValue(item.raw, aliases);
+      if (!value) return;
+
+      const matched = Object.keys(item.raw).find(header =>
+        aliases.some(alias => {
+          const a = normalizeHeader(alias);
+          const h = normalizeHeader(header);
+          return h === a || h.includes(a) || a.includes(h);
+        })
+      );
+      if (matched) usedHeaders.add(matched);
+
+      subjectRows.push([subject, splitGrades(value)]);
+    });
+
+    if (!subjectRows.length && overallGrades) {
+      const availableSubjects = splitGrades(
+        getFieldValue(item.raw, ['가능과목','수업가능과목','수업과목','교습과목','과목'])
+      );
+      const grades = splitGrades(overallGrades);
+
+      if (availableSubjects.length) {
+        availableSubjects.forEach(subject => subjectRows.push([subject, grades]));
+      } else {
+        subjectRows.push(['전체 과목', grades]);
+      }
+    }
+
+    document.getElementById('branchGradeTable').innerHTML = subjectRows.length
+      ? subjectRows.map(([subject, grades]) => `
+          <div class="subject-grade-row">
+            <div class="subject-grade-name">${escapeHTML(subject)}</div>
+            <div class="grade-chip-wrap">
+              ${grades.length
+                ? grades.map(grade => `<span class="grade-chip">${escapeHTML(grade)}</span>`).join('')
+                : '<span class="detail-empty">등록된 학년 정보가 없습니다.</span>'}
+            </div>
+          </div>`).join('')
+      : `
+        <div class="subject-grade-row">
+          <div class="subject-grade-name">수업 정보</div>
+          <div class="grade-chip-wrap"><span class="detail-empty">등록된 과목·학년 정보가 없습니다.</span></div>
+        </div>`;
+
+    Object.keys(item.raw).forEach(header => {
+      const normalized = normalizeHeader(header);
+      if (
+        ['지점명','센터명','학원명','지점','센터'].includes(normalized) ||
+        normalized.includes('가능학년') ||
+        normalized.includes('수업가능학년') ||
+        normalized.includes('가능과목') ||
+        normalized.includes('수업과목') ||
+        normalized.includes('위치안내') ||
+        normalized.includes('타겟학교') ||
+        normalized.includes('타깃학교') ||
+        normalized.includes('수업학교') ||
+        normalized === '초등학교' ||
+        normalized === '중학교' ||
+        normalized === '고등학교'
+      ) {
+        usedHeaders.add(header);
+      }
+    });
+
+    const extraRows = Object.entries(item.raw)
+      .filter(([header,value]) => String(value || '').trim() && !usedHeaders.has(header))
+      .map(([header,value]) => [header,value]);
+
+    const extraSection = document.getElementById('branchExtraSection');
+    if (extraRows.length) {
+      extraSection.style.display = '';
+      document.getElementById('branchExtraTable').innerHTML = extraRows
+        .map(([label,value]) => `
+          <div class="detail-row">
+            <div class="detail-label">${escapeHTML(label)}</div>
+            <div class="detail-value">${escapeHTML(value)}</div>
+          </div>`)
+        .join('');
+    } else {
+      extraSection.style.display = 'none';
+      document.getElementById('branchExtraTable').innerHTML = '';
+    }
+
+
+    function uniqueTerms(values) {
+      return [...new Set(
+        values.map(value => String(value || '').trim()).filter(Boolean)
+      )];
+    }
+
+    function extractActualAreasFromAddress(address) {
+      const source = String(address || '').replace(/\s+/g,' ').trim();
+      if (!source) return [];
+
+      return uniqueTerms(
+        (source.match(/[가-힣0-9]+(?:동|읍|면)/g) || [])
+          .map(term => term.replace(/^\d+/,'').trim())
+          .filter(term => term.length >= 2)
+      );
+    }
+
+    function extractAreaFromSchools(value) {
+      return uniqueTerms(
+        String(value || '')
+          .split(/[,/·|]+/)
+          .map(value => value.trim())
+          .filter(Boolean)
+          .map(school => school.replace(/\s+/g,'')
+            .replace(/(초등학교|중학교|고등학교|초교|중교|고교)$/,'')
+            .replace(/(초|중|고)$/,'')
+            .trim())
+          .filter(area =>
+            area.length >= 2 &&
+            !['중앙','제일','새롬','한빛','한솔','샘물','미래'].includes(area)
+          )
+      );
+    }
+
+    const fullBranchAddress = [item.address,item.address2].filter(Boolean).join(' ');
+    const actualAddressAreas = extractActualAreasFromAddress(fullBranchAddress);
+
+    const schoolAreaCandidates = uniqueTerms([
+      ...extractAreaFromSchools(elementarySchools !== '-' ? elementarySchools : ''),
+      ...extractAreaFromSchools(middleSchools !== '-' ? middleSchools : ''),
+      ...extractAreaFromSchools(highSchools !== '-' ? highSchools : '')
+    ]);
+
+    const primaryArea = actualAddressAreas[0] || '';
+    const normalizedPrimary = primaryArea.replace(/(동|읍|면)$/,'');
+
+    const nearbyArea = schoolAreaCandidates.find(area => {
+      const normalizedArea = area.replace(/(동|읍|면)$/,'');
+      return area && normalizedArea !== normalizedPrimary;
+    }) || '';
+
+    const livingAreas = uniqueTerms([primaryArea, nearbyArea]).slice(0, 2);
+
+    const branchBase = item.name.replace(/점$/, '');
+    const nearbyElementary = elementarySchools !== '-' ? elementarySchools : '인근 초등학교';
+    const nearbyMiddle = middleSchools !== '-' ? middleSchools : '인근 중학교';
+    const nearbyHigh = highSchools !== '-' ? highSchools : '인근 고등학교';
+
+    const localKeywords = [];
+
+    livingAreas.forEach(area => {
+      localKeywords.push(
+        `${area}초등영어학원`,
+        `${area}초등수학학원`,
+        `${area}중등영어학원`,
+        `${area}중등수학학원`,
+        `${area}고등영어내신`,
+        `${area}고등수학내신`
+      );
+    });
+
+    localKeywords.push(
+      `${branchBase}점 학습코칭`,
+      `${branchBase}점 내신관리`
+    );
+
+    const livingAreaText = livingAreas.length
+      ? livingAreas.join('·')
+      : [item.city,item.region].filter(Boolean).join(' ');
+
+    document.getElementById('branchLocalTitle').textContent =
+      `${item.name} ${livingAreaText || '인근 생활권'} 학습 안내`;
+
+    document.getElementById('branchLocalText').textContent =
+      `${item.name}은 ${livingAreaText || '인근'} 생활권 학생들의 초등 기초학습, 중등 내신, 고등 시험 대비를 학년별로 점검할 수 있는 지점입니다. ` +
+      `${nearbyElementary}, ${nearbyMiddle}, ${nearbyHigh} 학생은 학교 진도와 시험 범위에 맞춰 국어·영어·수학 중심의 학습 계획을 세우고 과제, 오답, 복습, 수행평가 일정을 함께 관리할 수 있습니다. ` +
+      `${primaryArea ? primaryArea + ' 초등 과정은' : '초등 과정은'} 어휘와 문장 읽기, 연산과 개념 이해를 중심으로 살피며, ` +
+      `${nearbyArea ? nearbyArea + '을 포함한 인근 생활권의 ' : '인근 생활권의 '}중학생은 교과서, 학교별 내신 유형, 서술형과 수행평가를 연결해 준비합니다. ` +
+      `고등학생은 영어 지문 분석, 수학 개념 적용, 모의고사와 내신 일정 관리처럼 과목별 우선순위를 나누어 학습하는 방식이 필요합니다.`;
+
+    document.getElementById('branchKeywordChips').innerHTML =
+      uniqueTerms(localKeywords).slice(0, 14).map(keyword =>
+        `<span class="keyword-chip">${escapeHTML(keyword)}</span>`
+      ).join('');
+
+    const fullAddress = [item.address,item.address2].filter(Boolean).join(' ').trim();
+    const mapWrap = document.getElementById('branchMapWrap');
+    const kakaoLink = document.getElementById('openKakaoMap');
+    const folderLink = document.getElementById('openKakaoFolder');
+
+    folderLink.href = KAKAO_BRANCH_FOLDER_URL;
+
+    if (fullAddress) {
+      const query = encodeURIComponent(`${item.name} ${fullAddress}`);
+      kakaoLink.href = `https://map.kakao.com/link/search/${query}`;
+      kakaoLink.style.display = '';
+      renderKakaoMap(mapWrap, item.address || fullAddress, item.name);
+    } else {
+      mapWrap.innerHTML =
+        '<div class="map-placeholder">시트에 주소가 입력되면 카카오 지도가 표시됩니다.</div>';
+      kakaoLink.href = `https://map.kakao.com/link/search/${encodeURIComponent(item.name)}`;
+      kakaoLink.style.display = '';
+    }
+
+    branchModal.classList.add('open');
+    branchModal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeBranchModal() {
+    branchModal.classList.remove('open');
+    branchModal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
+  }
+
+  branchModalClose.addEventListener('click', closeBranchModal);
+  branchModal.addEventListener('click', event => {
+    if (event.target === branchModal) closeBranchModal();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && branchModal.classList.contains('open')) closeBranchModal();
+  });
+
+  document.getElementById('selectBranchConsult').addEventListener('click', () => {
+    if (!activeBranch) return;
+    document.getElementById('branchName').value = activeBranch.name;
+    closeBranchModal();
+    document.getElementById('consult').scrollIntoView({behavior:'smooth'});
+  });
+
+  async function loadBranches(force = false) {
+    const list = document.getElementById('branchList');
+    const count = document.getElementById('branchCount');
+    list.innerHTML = '<div class="branch-loading">지점 구글시트를 불러오는 중입니다.</div>';
+    count.textContent = '지점 정보를 불러오는 중입니다.';
+
+    try {
+      const url = force ? `${BRANCH_CSV_URL}&t=${Date.now()}` : BRANCH_CSV_URL;
+      const response = await fetch(url, {cache: force ? 'no-store' : 'default'});
+      if (!response.ok) throw new Error(`CSV 불러오기 실패: ${response.status}`);
+
+      const text = await response.text();
+      const rows = parseCSV(text);
+      branchData = buildBranchObjects(rows);
+
+      if (!branchData.length) throw new Error('시트에서 지점 데이터를 찾지 못했습니다.');
+
+      populateRegionFilter();
+      populateRegionButtons();
+      populateBranchSelect();
+      renderBranches();
+    } catch (error) {
+      console.error(error);
+      count.textContent = '지점 정보를 불러오지 못했습니다.';
+      list.innerHTML = `
+        <div class="branch-error">
+          지점 구글시트를 불러오지 못했습니다.<br>
+          시트가 웹에 CSV로 공개되어 있는지, 첫 행에 지점명 열이 있는지 확인해 주세요.
+        </div>`;
+      const regionButtons = document.getElementById('regionButtons');
+      if (regionButtons) {
+        regionButtons.innerHTML = `
+          <div class="branch-error" style="grid-column:1/-1">
+            지역 정보를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.
+          </div>`;
+      }
+    }
+  }
+
+  document.getElementById('branchBackBtn').addEventListener('click', resetRegionView);
+  document.getElementById('branchSearch').addEventListener('input', renderBranches);
+  document.getElementById('regionFilter').addEventListener('change', renderBranches);
+  document.getElementById('reloadBranches').addEventListener('click', () => loadBranches(true));
+  loadBranches();
+
+  /* =========================
+     주소 검색
+     ========================= */
+
+  document.getElementById('addressBtn').addEventListener('click', () => {
+    if (!window.daum || !window.daum.Postcode) {
+      alert('주소 검색 서비스를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
+
+    new daum.Postcode({
+      oncomplete: function(data) {
+        const address = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+        document.getElementById('address').value = address;
+        document.getElementById('detailAddress').focus();
+      }
+    }).open();
+  });
+
+  /* =========================
+     전화번호 형식
+     ========================= */
+
+  document.getElementById('phone').addEventListener('input', event => {
+    const digits = event.target.value.replace(/\D/g,'').slice(0,11);
+    if (digits.length < 4) event.target.value = digits;
+    else if (digits.length < 8) event.target.value = `${digits.slice(0,3)}-${digits.slice(3)}`;
+    else event.target.value = `${digits.slice(0,3)}-${digits.slice(3,7)}-${digits.slice(7)}`;
+  });
+
+  /* =========================
+     상담 신청 제출
+     ========================= */
+
+  const consultForm = document.getElementById('consultForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formStatus = document.getElementById('formStatus');
+
+  function showStatus(message, type) {
+    formStatus.textContent = message;
+    formStatus.className = `form-status show ${type}`;
+  }
+
+  let activeConsultRequestId = '';
+  let consultTimeoutId = null;
+
+  window.addEventListener('message', event => {
+    const payload = event.data || {};
+    if (
+      payload.source !== 'wawa-consult' ||
+      !payload.requestId ||
+      payload.requestId !== activeConsultRequestId
+    ) {
+      return;
+    }
+
+    clearTimeout(consultTimeoutId);
+    submitBtn.disabled = false;
+    submitBtn.textContent = '상담 신청서 제출';
+
+    if (payload.ok) {
+      showStatus('상담 신청이 정상 접수되었습니다. 담당자가 확인 후 연락드리겠습니다.', 'success');
+      consultForm.reset();
+    } else {
+      showStatus(
+        payload.message || '상담 신청 저장 중 문제가 발생했습니다. 관리자에게 확인해 주세요.',
+        'error'
+      );
+    }
+
+    activeConsultRequestId = '';
+  });
+
+  function submitConsultWithIframe(data) {
+    const requestId =
+      'wawa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
+    activeConsultRequestId = requestId;
+    data.requestId = requestId;
+    data.parentOrigin = location.origin;
+
+    const tempForm = document.createElement('form');
+    tempForm.method = 'POST';
+    tempForm.action = CONSULT_API_URL;
+    tempForm.target = 'consultSubmitFrame';
+    tempForm.style.display = 'none';
+    tempForm.acceptCharset = 'UTF-8';
+
+    Object.entries(data).forEach(([key, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = String(value == null ? '' : value);
+      tempForm.appendChild(input);
+    });
+
+    document.body.appendChild(tempForm);
+    tempForm.submit();
+    setTimeout(() => tempForm.remove(), 1000);
+
+    consultTimeoutId = setTimeout(() => {
+      if (activeConsultRequestId !== requestId) return;
+      submitBtn.disabled = false;
+      submitBtn.textContent = '상담 신청서 제출';
+      showStatus(
+        '서버 응답이 없습니다. Apps Script 배포 권한과 최신 버전 배포 여부를 확인해 주세요.',
+        'error'
+      );
+      activeConsultRequestId = '';
+    }, 15000);
+  }
+
+  consultForm.addEventListener('submit', event => {
+    event.preventDefault();
+
+    if (CONSULT_API_URL.startsWith('여기에_')) {
+      showStatus('Apps Script 웹 앱 주소가 아직 입력되지 않았습니다.', 'error');
+      return;
+    }
+
+    const selectedSubjects = [...document.querySelectorAll('input[name="subjects"]:checked')]
+      .map(input => input.value);
+
+    if (!selectedSubjects.length) {
+      showStatus('상담을 희망하는 수업과목을 한 개 이상 선택해 주세요.', 'error');
+      return;
+    }
+
+    const data = {
+      branchName: document.getElementById('branchName').value,
+      studentName: document.getElementById('studentName').value.trim(),
+      grade: document.getElementById('grade').value,
+      gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+      schoolName: document.getElementById('schoolName').value.trim(),
+      subjects: selectedSubjects.join(', '),
+      phone: document.getElementById('phone').value.trim(),
+      address: document.getElementById('address').value.trim(),
+      detailAddress: document.getElementById('detailAddress').value.trim(),
+      memo: document.getElementById('memo').value.trim(),
+      privacyAgree: document.getElementById('privacyAgree').checked ? '동의' : '',
+      website: consultForm.elements.website.value,
+      pageUrl: location.href,
+      userAgent: navigator.userAgent
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '제출 중입니다...';
+    showStatus('상담 신청서를 저장하고 있습니다.', 'success');
+    submitConsultWithIframe(data);
+  });
+</script>
+<iframe name="consultSubmitFrame" id="consultSubmitFrame" title="상담신청 전송" style="display:none"></iframe>
+</body>
+</html>
